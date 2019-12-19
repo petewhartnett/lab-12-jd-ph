@@ -6,6 +6,7 @@ const express = require('express');
 const ejs = require('ejs');
 const superagent = require('superagent');
 const PORT = process.env.PORT || 3000;
+const methodoverride = require('method-override');
 const app = express();
 const pg = require('pg');
 
@@ -14,21 +15,29 @@ require('dotenv').config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./public'));
 app.set('view engine', 'ejs');
+app.use(methodoverride('_method'));
+app.delete('/delete', deleteBook);
 
 
 const client = new pg.Client(process.env.DATABASE_URL);
 client.on('error', (e) => console.error(e));
 client.connect();
 
+//SEARCH PATH
 app.get('/search', (req, res) => {
   res.render('searchGoogleApi');
 });
 
+//USER SAVED BOOKS PATH 
+app.get('/savedBook', (req, res) => {
+    res.render('savedBooks');
+  });
+
 app.get('/', (req, res) => {
   const instruction = 'SELECT * FROM books;';
-  client.query(instruction).then(function(sqlData){
-    console.log(sqlData.rows);
-    const booksArray = sqlData.rows;
+  client.query(instruction).then(function(sqlSaveData){
+    console.log(sqlSaveData.rows);
+    const booksArray = sqlSaveData.rows;
     if(booksArray.length > 0){
       res.render('index', { booksArray });
     } else {
@@ -40,17 +49,41 @@ app.get('/', (req, res) => {
 
 
 app.post('/user-books', (req, res) => {
-    // const bookArray = [];
-    // bookArray.push(req.body);
-    const books = req.body(savedBooks => new Book(savedBooks));
-    res.render('savedBooks', bookArray);
+    let SQL = `INSERT INTO books
+    (author, title, isbn, image_url, summary, category)
+    VALUES($1,$2,$3,$4,$5,$6);`;
+
+    let sqlData = [req.body.author, req.body.title, req.body.isbn, req.body.image_url, req.body.summary, req.body.category];
+
+    // let SQLrow = (SQL, [req.body.author, req.body.title, req.body.isbn, req.body.image_url, req.body.summary, req.body.category]);
+
+    client.query(SQL, sqlData)
+
+    const instruction = 'SELECT * FROM books;';
+  client.query(instruction).then(function(sqlSaveData){
+    console.log(sqlSaveData.rows);
+    const booksArray = sqlSaveData.rows;
+    if(booksArray.length > 0){
+      res.render('savedBooks', { booksArray });
+    } else {
+      res.render('savedBooks');
+    }
+
+  });
     
+
   });
 
-app.get('/hello', (req, res) => {
-  res.render('pages/hello');
-});
 
+function deleteBook(req, res){
+    // console.log(req.query, 'query');
+     //console.log(req.params, 'params');
+    //console.log(req.body.id, 'body');
+    client.query('DELETE FROM books WHERE id=$1', [req.body.id]).then(() => {
+     res.redirect('/');
+    });
+    console.log('book deleted');
+}
 app.post('/searches', (req, res) => {
   superagent.get(`https://www.googleapis.com/books/v1/volumes?q=${req.body.query}+in${req.body.search}`).then(data => {
     const books = data.body.items.map(book => new Book(book));

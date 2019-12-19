@@ -9,33 +9,43 @@
 
   <link rel="stylesheet" href="styles/styles.css" rel="stylesheet" type="text/css">
 
-
+  
+</head>
 
 <body>
   <header>
     <nav>
-      <span>Book App</span>
-      
-  
-      <a href="/search">Search Google Books</a>
+        <center>      
+            <span>YOUR FAVORITE BOOKS!</span>
+            <br>
+            <a href="/search">Back To Search Google Books</a>
+   
      
     </nav>
   </header>
 
   <main>
-    <h3 class="center"><span id="count"><%=  bookArray.length %></span> Books</h3>
+    <h3 class="center"><span id="count"><%=  booksArray.length %></span> Books</h3>
     <div class="content">
-      <% bookArray.forEach(book => { %>
-      <% if (bookArry[0]) { %>
+      <% booksArray.forEach(book => { %>
+      <% if (book.image_url) { %>
       <img src="<%= book.image_url %>" />
       <% } %>
-      <h2><%= bookArray[1] %> </h2>
-      <h3><%= bookArray[2] %> </h3>
-      <h4><%= bookArray[3] %> </h4>
-      <h3><%= bookArray[4] %> </h3>
-      <p><%= bookArray[5] %> </p>
+      <h2><%= book.title %> </h2>
+      <h3><%= book.author %> </h3>
+      <h4><%= book.isbn %> </h4>
+      <h3><%= book.category %> </h3>
+      <p><%= book.summary %> </p>
+      
+      <form action="/delete?_method=DELETE" method="POST">
+       
+        <input type="submit" value="delete book">
+      </form>
+
       <% }) %>
 
+
+    </center>
 
     </div>
   </main>
