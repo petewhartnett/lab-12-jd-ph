@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Book App</title>
+  <link rel="stylesheet" href="styles/styles.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <span>Book App</span>
+      <i class="fa fa-bars"></i>
+    </nav>
+  </header>
+
+  <main>
+    <h3 class="center">Search by Title or Author</h3>
+    <div class="content">
+      <form method="POST" action="/searches">
+        <fieldset class="google-search">
+          <label >
+            <input id="entername" name="query" type="text"  placeholder ="enter the name">
+          </label >
+        </fieldset>
+        
+        <fieldset class="google-search radio">
+          <label >Search by Author
+            <input type="radio" name="search" value="author">
+          </label>
+        </fieldset>
+        
+        <fieldset class="google-search radio">
+          <label >Search by Title
+            <input type="radio"  name="search" value="title">
+        </fieldset>
+
+
+        <fieldset class="google-search submit">
+          <button class="google-search submit" type ="submit"> Search the Google Books </button>
+        </fieldset>
+      </form>
+    </div>
+  </main>
+</body>
+
+</html>
