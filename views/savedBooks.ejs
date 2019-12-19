@@ -9,8 +9,7 @@
 
   <link rel="stylesheet" href="styles/styles.css" rel="stylesheet" type="text/css">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+
 
 <body>
   <header>
@@ -24,17 +23,17 @@
   </header>
 
   <main>
-    <h3 class="center"><span id="count"><%=  booksArray.length %></span> Books</h3>
+    <h3 class="center"><span id="count"><%=  bookArray.length %></span> Books</h3>
     <div class="content">
-      <% booksArray.forEach(book => { %>
-      <% if (book.image_url) { %>
+      <% bookArray.forEach(book => { %>
+      <% if (bookArry[0]) { %>
       <img src="<%= book.image_url %>" />
       <% } %>
-      <h2><%= book.title %> </h2>
-      <h3><%= book.author %> </h3>
-      <h4><%= book.isbn %> </h4>
-      <h3><%= book.category %> </h3>
-      <p><%= book.summary %> </p>
+      <h2><%= bookArray[1] %> </h2>
+      <h3><%= bookArray[2] %> </h3>
+      <h4><%= bookArray[3] %> </h4>
+      <h3><%= bookArray[4] %> </h3>
+      <p><%= bookArray[5] %> </p>
       <% }) %>
 
 

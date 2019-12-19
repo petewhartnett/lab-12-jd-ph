@@ -32,12 +32,20 @@ app.get('/', (req, res) => {
     if(booksArray.length > 0){
       res.render('index', { booksArray });
     } else {
-      res.render('pages/index');
+      res.render('index');
     }
 
   });
 });
 
+
+app.post('/user-books', (req, res) => {
+    // const bookArray = [];
+    // bookArray.push(req.body);
+    const books = req.body(savedBooks => new Book(savedBooks));
+    res.render('savedBooks', bookArray);
+    
+  });
 
 app.get('/hello', (req, res) => {
   res.render('pages/hello');
