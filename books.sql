@@ -7,8 +7,3 @@ image_url VARCHAR(255),
 summary TEXT,
 category VARCHAR(255)
 );
-
-INSERT INTO books (author, title, isbn, image_url, summary, category)
-VALUES('Charles Dickens', 'Moby Dick', '000000001', 'https://via.placeholder.com/250', 'Best book ever', 'fiction');
-INSERT INTO books (author, title, isbn, image_url, summary, category)
-VALUES('Charles D', 'Moby ', '2', 'https://via.placeholder.com/150', 'Worst book ever', 'non fiction');

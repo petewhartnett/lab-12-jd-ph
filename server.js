@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 app.use(methodoverride('_method'));
 app.delete('/delete', deleteBook);
 
-
+// POSTGRESS SET UP CLIENT 
 const client = new pg.Client(process.env.DATABASE_URL);
 client.on('error', (e) => console.error(e));
 client.connect();
@@ -33,6 +33,7 @@ app.get('/savedBook', (req, res) => {
     res.render('savedBooks');
   });
 
+  //this selects all of the books from SQL saved books
 app.get('/', (req, res) => {
   const instruction = 'SELECT * FROM books;';
   client.query(instruction).then(function(sqlSaveData){
@@ -47,7 +48,7 @@ app.get('/', (req, res) => {
   });
 });
 
-
+//THIS WILL SAVE THE USER BOOKS TO SQL AND RENDER THEM TO SAVED BOOKS PAGE
 app.post('/user-books', (req, res) => {
     let SQL = `INSERT INTO books
     (author, title, isbn, image_url, summary, category)
@@ -59,8 +60,8 @@ app.post('/user-books', (req, res) => {
 
     client.query(SQL, sqlData)
 
-    const instruction = 'SELECT * FROM books;';
-  client.query(instruction).then(function(sqlSaveData){
+    const getAllBooks = 'SELECT * FROM books;';
+  client.query(getAllBooks).then(function(sqlSaveData){
     console.log(sqlSaveData.rows);
     const booksArray = sqlSaveData.rows;
     if(booksArray.length > 0){
@@ -75,14 +76,15 @@ app.post('/user-books', (req, res) => {
   });
 
 
+  //THIS WILL DELETE A
 function deleteBook(req, res){
     // console.log(req.query, 'query');
      //console.log(req.params, 'params');
     //console.log(req.body.id, 'body');
-    client.query('DELETE FROM books WHERE id=$1', [req.body.id]).then(() => {
-     res.redirect('/');
-    });
+    client.query('DELETE FROM books WHERE id=$1', [req.body.id]).then(result=>{
     console.log('book deleted');
+    res.redirect('/');
+    });
 }
 app.post('/searches', (req, res) => {
   superagent.get(`https://www.googleapis.com/books/v1/volumes?q=${req.body.query}+in${req.body.search}`).then(data => {

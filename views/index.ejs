@@ -9,7 +9,6 @@
 
   <link rel="stylesheet" href="styles/styles.css" rel="stylesheet" type="text/css">
 
-  
 </head>
 
 <body>
@@ -21,14 +20,30 @@
     
       <a href="/search">Search Google Books</a>
       <br>
-     
+      
     </center>
   
     </nav>
   </header>
 
   <main>
- 
+    <h3 class="center"><span id="count"><%=  booksArray.length %></span> Books</h3>
+    <div class="content">
+      <% booksArray.forEach(book => { %>
+      <% if (book.image_url) { %>
+      <img src="<%= book.image_url %>" />
+      <% } %>
+      <h2><%= book.title %> </h2>
+      <h3><%= book.author %> </h3>
+      <h4><%= book.isbn %> </h4>
+      <h3><%= book.category %> </h3>
+      <p><%= book.summary %> </p>
+      <form action="/delete?_method=DELETE" method="POST">
+       
+        <input type="submit" value="delete book">
+      </form>
+      <% }) %>
+
 
     </div>
   </main>
