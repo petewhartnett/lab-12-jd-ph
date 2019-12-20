@@ -33,6 +33,10 @@ app.get('/savedBook', (req, res) => {
     res.render('savedBooks');
   });
 
+  app.get('/detail-view', (req, res) => {
+    res.render('details');
+  });
+
   //this selects all of the books from SQL saved books
 app.get('/', (req, res) => {
   const instruction = 'SELECT * FROM books;';
@@ -45,10 +49,8 @@ app.get('/', (req, res) => {
     } else {
       res.redirect('/search');
     }
-
   });
 });
-
 
 //THIS WILL SAVE THE USER BOOKS TO SQL AND RENDER THEM TO SAVED BOOKS PAGE
 app.post('/user-books', (req, res) => {
@@ -64,6 +66,15 @@ app.post('/user-books', (req, res) => {
     res.redirect('/');
   });
 
+});
+
+app.post('/detail-view', (req, res) => {
+  
+  let info = [req.author, req.title, req.isbn, req.image_url, req.summary, req.category];
+
+
+    res.redirect('details');
+  
 
 });
 
@@ -75,6 +86,7 @@ function deleteBook(req, res){
     res.redirect('/');
     });
 }
+
 app.post('/searches', (req, res) => {
   superagent.get(`https://www.googleapis.com/books/v1/volumes?q=+in${req.body.search}:${req.body.query}`).then(data => {
     const books = data.body.items.map(book => new Book(book));

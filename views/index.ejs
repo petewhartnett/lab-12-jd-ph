@@ -8,7 +8,7 @@
   <title>Book App</title>
 
   <link rel="stylesheet" href="styles/styles.css" rel="stylesheet" type="text/css">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -36,13 +36,42 @@
       <h2><%= book.title %> </h2>
       <!-- <h2>bookid<%= book.id %> </h2> -->
       <h3><%= book.author %> </h3>
-      <h4><%= book.isbn %> </h4>
-      <h3><%= book.category %> </h3>
-      <p><%= book.summary %> </p>
+      
       <form action="/delete?_method=DELETE" method="POST">
         <input type="hidden" name= "id" value="<%=book.id%>">
         <input type="submit" value="delete book">
       </form>
+
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $("#Show").toggle();
+          $("#display-info").click(function(){
+            $("#Show").toggle();
+          });
+        });
+        
+      </script>
+<p><input type="button" value="show-details" id="display-info"/></p>
+      <div id="Show">
+          <h4><%= book.isbn %> </h4>
+          <h3><%= book.category %> </h3>
+          <p><%= book.summary %> </p>
+<h3>Edit Details</h3>
+      <form id = 'details'>
+          <input type ="" name="image_url" value="<%= book.image_url %>">
+          <input type =""name="title" value="<%= book.title %>">
+          <input type ="text" name="author" value="<%= book.author %>">
+          <input type ="" name="isbn" value="<%= book.isbn %>">
+          <input type ="" name="category" value="<%= book.category %>">
+          <input type ="" name="summary" value="<%= book.summary %>">
+         
+        </form>
+        </div>
+
+
+
+
+      </div>
       <% }) %>
 
 
