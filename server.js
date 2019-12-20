@@ -62,7 +62,7 @@ app.post('/user-books', (req, res) => {
 
     const getAllBooks = 'SELECT * FROM books;';
   client.query(getAllBooks).then(function(sqlSaveData){
-    console.log(sqlSaveData.rows);
+   // console.log(sqlSaveData.rows);
     const booksArray = sqlSaveData.rows;
     if(booksArray.length > 0){
       res.render('savedBooks', { booksArray });
@@ -71,18 +71,18 @@ app.post('/user-books', (req, res) => {
     }
 
   });
-    
+
 
   });
 
 
   //THIS WILL DELETE A
 function deleteBook(req, res){
-    // console.log(req.query, 'query');
-     //console.log(req.params, 'params');
-    //console.log(req.body.id, 'body');
-    client.query('DELETE FROM books WHERE id=$1', [req.body.id]).then(result=>{
-    console.log('book deleted');
+    // console.log(req.query);
+     //console.log(req.params);
+    //console.log(req.body.id);
+    client.query('DELETE FROM books WHERE id=$1', [req.params.id]).then(result=>{
+    console.log(req.params.id);
     res.redirect('/');
     });
 }
