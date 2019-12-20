@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(116, 93, 20);
+  color: rgb(187, 206, 21);
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5em;
+  background-color: rgb(200, 24, 200);
+}
+
+#search {
+  background-color: rgb(21, 143, 160);
+  font-size: 2em;
+}
+
+.google-search {
+  background-color: rgb(51, 172, 40);
+
+}
+
+fieldset {
+  background-color: rgb(43, 44, 102)
+}
+
+button {
+  font-size: 1em;
+}
