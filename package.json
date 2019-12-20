@@ -19,12 +19,15 @@
   },
   "homepage": "https://github.com/petewhartnett/lab-12-jd-ph#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "method-override": "^3.0.0",
     "middleware": "^1.0.0",
     "pg": "^7.15.1",
+    "pjs": "^5.1.2",
+    "port": "^0.8.1",
     "superagent": "^5.1.2"
   }
 }

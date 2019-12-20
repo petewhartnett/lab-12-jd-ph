@@ -34,12 +34,13 @@
       <img src="<%= book.image_url %>" />
       <% } %>
       <h2><%= book.title %> </h2>
+      <!-- <h2>bookid<%= book.id %> </h2> -->
       <h3><%= book.author %> </h3>
       <h4><%= book.isbn %> </h4>
       <h3><%= book.category %> </h3>
       <p><%= book.summary %> </p>
       <form action="/delete?_method=DELETE" method="POST">
-       
+        <input type="hidden" name= "id" value="<%=book.id%>">
         <input type="submit" value="delete book">
       </form>
       <% }) %>
