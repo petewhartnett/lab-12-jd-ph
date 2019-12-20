@@ -1,5 +1,3 @@
-
-
 'use strict';
 
 const express = require('express');
@@ -39,26 +37,28 @@ app.get('/', (req, res) => {
 });
 
 
-app.post('/user-books', (req, res) => {
-    // const bookArray = [];
-    // bookArray.push(req.body);
-    const books = req.body(savedBooks => new Book(savedBooks));
-    res.render('savedBooks', bookArray);
-    
-  });
 
 app.get('/hello', (req, res) => {
   res.render('pages/hello');
 });
 
+let books = [];
 app.post('/searches', (req, res) => {
+  books = 0;
   superagent.get(`https://www.googleapis.com/books/v1/volumes?q=${req.body.query}+in${req.body.search}`).then(data => {
-    const books = data.body.items.map(book => new Book(book));
+    books = data.body.items.map(book => new Book(book));
     res.render('searchList', { books });
   }).catch(error => {
     res.render('error', { error });
   });
 });
+
+app.post('/user-details', (req, res) => {
+    var books1 = data.body.items.map(book => new Book(books));
+    console.log(books1);
+    res.render('details', {books1});
+    
+  });
 
 function Book(bookObj) {
   this.image_url = bookObj.volumeInfo.imageLinks && bookObj.volumeInfo.imageLinks.thumbnail;
@@ -70,3 +70,4 @@ function Book(bookObj) {
 }
 
 app.listen(PORT, () => console.log(`app running on ${PORT}`));
+

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Book App</title>
+
+  <link rel="stylesheet" href="styles/styles.css" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <span>Book App</span>
+      
+  
+      <a href="/search">Search Google Books</a>
+     
+    </nav>
+  </header>
+
+  <main>
+      <%=  books1 %></span> Books</h3>
+    <div class="content">
+      <% books1[0] (book => { %>
+      <h2><%= bookArray[1] %> </h2>
+      <h3><%= bookArray[2] %> </h3>
+      <h4><%= bookArray[3] %> </h4>
+      <h3><%= bookArray[4] %> </h3>
+      <p><%= bookArray[5] %> </p>
+      <% }) %>
+   
+
+
+    </div>
+  </main>
+</body>
+
+</html>
