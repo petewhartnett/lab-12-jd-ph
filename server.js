@@ -70,7 +70,6 @@ app.post('/detail-view', (req, res) => {
   
   let info = [req.author, req.title, req.isbn, req.image_url, req.summary, req.category];
 
-
     res.redirect('details');
   
 
